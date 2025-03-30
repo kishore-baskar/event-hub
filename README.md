@@ -1,12 +1,12 @@
 EventHub - Event Management and Chatbot Platform
 
-Problem Statement
+Problem Statement:
 Organizing and managing events can be a complex task for both organizers and attendees. Event organizers need a platform to create events, track registrations, monitor crowd density at stalls, and analyze feedback, while attendees require an easy way to discover events, register, and get real-time information. Existing solutions often lack an integrated, user-friendly interface with intelligent assistance, such as a chatbot that provides event-specific information and quick options for common queries. The challenge was to build a web application that addresses these needs with a seamless UI, database-driven event management, and a chatbot restricted to event-related responses.
 
-Solution
+Solution:
 EventHub is a Flask-based web application designed to streamline event management and enhance user experience. It offers features like event creation, user registration, interest-based recommendations, crowd monitoring, feedback analysis, and an AI-powered chatbot named EventBuddy. The chatbot supports two modes: a free-text "Chat" option for event-related queries (e.g., "What’s the venue of Tech Fest?") and a "Quick Options" mode for predefined queries (e.g., "List all events"). EventBuddy fetches data from an SQLite database and ensures responses are event-focused, replying "I can only provide information about events" for off-topic queries. The application integrates a modern UI with animations, secure user sessions, and real-time data processing.
 
-Features
+Features:
 Event Management: Create, view, and register for events with details stored in an SQLite database.
 User Profiles: Register users with interests for personalized event recommendations.
 Recommendations: Interest-based, mood-based, and trend-based event suggestions using TextBlob for sentiment analysis.
@@ -16,9 +16,8 @@ Chatbot (EventBuddy): Dual-mode chatbot (Chat and Quick Options) powered by Groq
 Admin Dashboard: Manage feedback with display and delete options.
 Responsive UI: Animated, mobile-friendly design with CSS and JavaScript.
 
-Prerequisites
+Prerequisites:
 Before setting up EventHub, ensure you have the following installed:
-
 Python 3.8+: Core programming language.
 pip: Python package manager.
 SQLite: Lightweight database (included with Python).
@@ -35,20 +34,25 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 3.Install Required Libraries: Install all dependencies listed in the "Libraries Used" section:
+
 pip install flask flask-cors groq pandas geopy folium textblob
 
 4.Set Up the Groq API Key:
 Sign up at Groq and obtain an API key.
 Replace the placeholder in app.py:
+
 GROQ_API_KEY = "your_actual_groq_api_key_here"
 
 5.Initialize the Database and CSV:
+
 Run the app once to create emr.db and feedback.csv:
 
 python app.py
 
 Stop the app (Ctrl+C) after initialization.
+
 6.Add Sample Data (Optional):
+
 Open emr.db with an SQLite client (e.g., DB Browser for SQLite) and insert test data:
 
 INSERT INTO users (name, email, interests) VALUES ('John Doe', 'john@example.com', 'Technology,Music');
