@@ -99,33 +99,6 @@ Folium: Generate interactive maps for crowd visualization (pip install folium).
 TextBlob: Sentiment analysis for mood-based recommendations (pip install textblob).
 Datetime/Math: Built-in Python libraries for date handling and calculations.
 
-Project Structure:
-EventHub/
-├── static/
-│   ├── css/
-│   │   └── styles.css    # CSS for UI styling
-│   ├── js/
-│   │   └── scripts.js    # JavaScript for interactivity
-│   └── images/
-│       └── logo.png      # Logo image (add your own)
-├── templates/
-│   ├── index.html        # Home page
-│   ├── register.html     # User registration
-│   ├── events.html       # Event listing
-│   ├── my_events.html    # User’s registered events
-│   ├── recommendations.html # Event recommendations
-│   ├── add_event.html    # Add new event
-│   ├── feedback.html     # Feedback form
-│   ├── performance_insights.html # Feedback analysis
-│   ├── stall_suggestions.html # Stall improvement suggestions
-│   ├── crowd_monitor.html # Crowd density map
-│   ├── admin_dashboard.html # Admin feedback management
-│   └── chatbot.html      # Chatbot interface
-├── app.py                # Main Flask application
-├── emr.db                # SQLite database (auto-generated)
-├── feedback.csv          # Feedback storage (auto-generated)
-└── README.md             # This file
-
 Troubleshooting:
 Chatbot Not Working: Verify the Groq API key and internet connection. Check app.py logs for errors.
 No Events Displayed: Ensure emr.db has data in the events table.
