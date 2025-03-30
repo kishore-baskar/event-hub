@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EventHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo animate-slide-in-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EventHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li class="animate-slide-in-right"><a href="/">Home</a></li>
+            <li class="animate-slide-in-right"><a href="/events">Events</a></li>
+            <li class="animate-slide-in-right"><a href="/my_events">My Events</a></li>
+            <li class="animate-slide-in-right"><a href="/recommendations">Recommendations</a></li>
+            <li class="animate-slide-in-right"><a href="/add_event">Add Event</a></li>
+            <li class="animate-slide-in-right"><a href="/feedback">Feedback</a></li>
+            <li class="animate-slide-in-right"><a href="/performance_insights">Performance Insights</a></li>
+            <li class="animate-slide-in-right"><a href="/stall_suggestions">Stall Suggestions</a></li>
+            <li class="animate-slide-in-right"><a href="/crowd_monitor">Crowd Monitor</a></li>
+            <li class="animate-slide-in-right"><a href="/admin_dashboard">Admin Dashboard</a></li>
+            <li class="animate-slide-in-right"><a href="/chatbot">Chatbot</a></li>
+        </ul>
+    </nav>
+
+    <section class="form-section animate-slide-up">
+        <h2>Admin Dashboard</h2>
+        {% if error %}
+        <p class="error animate-slide-up">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <input type="password" name="password" placeholder="Admin Password" required class="animate-input">
+            <select name="event" class="animate-input">
+                {% for event in events %}
+                <option value="{{ event }}" {% if event == selected_event %}selected{% endif %}>{{ event }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="animate-button">Access Dashboard</button>
+        </form>
+        {% if feedback %}
+        <h3 class="animate-slide-up">Feedback for {{ selected_event }}</h3>
+        <div class="work-grid">
+            {% for item in feedback %}
+            <div class="work-card animate-card">
+                <p><strong>Name:</strong> {{ item.name }}</p>
+                <p><strong>Feedback:</strong> {{ item.feedback }}</p>
+                <p><strong>Rating:</strong> {{ item.rating }}</p>
+                <p><strong>Response:</strong> {{ item.response or 'No response yet' }}</p>
+                {% if not item.response %}
+                <form method="POST">
+                    <input type="hidden" name="feedback_id" value="{{ loop.index0 }}">
+                    <textarea name="response" placeholder="Your Response" required class="animate-input"></textarea>
+                    <button type="submit" name="reply" class="animate-button">Reply</button>
+                </form>
+                {% endif %}
+                <form method="POST">
+                    <input type="hidden" name="delete" value="{{ loop.index0 }}">
+                    <button type="submit" class="animate-button delete-btn">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </section>
+
+    <footer class="animate-slide-up">
+        <p>© 2025 EventHub. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

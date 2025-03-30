@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - EventHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo animate-slide-in-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EventHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li class="animate-slide-in-right"><a href="/">Home</a></li>
+            <li class="animate-slide-in-right"><a href="/events">Events</a></li>
+            <li class="animate-slide-in-right"><a href="/my_events">My Events</a></li>
+            <li class="animate-slide-in-right"><a href="/recommendations">Recommendations</a></li>
+            <li class="animate-slide-in-right"><a href="/add_event">Add Event</a></li>
+            <li class="animate-slide-in-right"><a href="/feedback">Feedback</a></li>
+            <li class="animate-slide-in-right"><a href="/performance_insights">Performance Insights</a></li>
+            <li class="animate-slide-in-right"><a href="/stall_suggestions">Stall Suggestions</a></li>
+            <li class="animate-slide-in-right"><a href="/crowd_monitor">Crowd Monitor</a></li>
+            <li class="animate-slide-in-right"><a href="/admin_dashboard">Admin Dashboard</a></li>
+            <li class="animate-slide-in-right"><a href="/chatbot">Chatbot</a></li>
+        </ul>
+    </nav>
+
+    <section class="form-section animate-slide-up">
+        <h2>Share Your Feedback</h2>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your Name" required class="animate-input">
+            <textarea name="feedback" placeholder="Your Feedback" required class="animate-input"></textarea>
+            <select name="event" required class="animate-input">
+                {% for event in events %}
+                <option value="{{ event }}">{{ event }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required class="animate-input">
+            <button type="submit" class="animate-button">Submit Feedback</button>
+        </form>
+    </section>
+
+    <footer class="animate-slide-up">
+        <p>© 2025 EventHub. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

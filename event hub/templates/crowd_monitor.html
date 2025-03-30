@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Monitor</title>
+    <!-- Leaflet CSS for the map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crowd_styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo animate-slide-in-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EventHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li class="animate-slide-in-right"><a href="/">Home</a></li>
+            <li class="animate-slide-in-right"><a href="/events">Events</a></li>
+            <li class="animate-slide-in-right"><a href="/my_events">My Events</a></li>
+            <li class="animate-slide-in-right"><a href="/recommendations">Recommendations</a></li>
+            <li class="animate-slide-in-right"><a href="/add_event">Add Event</a></li>
+            <li class="animate-slide-in-right"><a href="/feedback">Feedback</a></li>
+            <li class="animate-slide-in-right"><a href="/performance_insights">Performance Insights</a></li>
+            <li class="animate-slide-in-right"><a href="/stall_suggestions">Stall Suggestions</a></li>
+            <li class="animate-slide-in-right"><a href="/crowd_monitor">Crowd Monitor</a></li>
+            <li class="animate-slide-in-right"><a href="/admin_dashboard">Admin Dashboard</a></li>
+            <li class="animate-slide-in-right"><a href="/chatbot">Chatbot</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Crowd Monitor</h1>
+
+        <!-- User ID Input -->
+        <div class="section">
+            <label for="user-id">User ID <span class="required">*</span></label>
+            <input type="text" id="user-id" placeholder="Enter your ID" required>
+        </div>
+
+        <!-- Stall Owner Section -->
+        <div class="section">
+            <label>
+                <input type="checkbox" id="is-stall-owner" onchange="toggleStallNameInput()">
+                I’m a Stall Owner
+            </label>
+            <div id="stall-name-section" style="display: none;">
+                <label for="stall-name">Stall Name</label>
+                <input type="text" id="stall-name" placeholder="e.g., Tech Stall">
+            </div>
+        </div>
+
+        <!-- Location Update Section -->
+        <div class="section">
+            <button class="update-button" onclick="updateLocation()" id="update-location-btn">
+                <i class="fas fa-map-marker-alt"></i>  Update Location
+            </button>
+            <p id="location-status" class="location-info"></p>
+            <p style="color: orange; font-size: 14px;">
+                Enable location permissions and Wi-Fi for increased accuracy. Ensure Wi-Fi is turned on, even if not connected to a network.
+            </p>
+        </div>
+
+        <div class="remove-stall-section">
+            <h3>Remove Your Stall</h3>
+            
+            <button id="remove-stall-btn" class="update-button" 
+    style="display: block; background-color: red; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;" 
+    onclick="removeStall()">🗑 Remove Your Stall</button>
+            <p id="remove-stall-message"></p>
+        </div>
+        <!-- Manual Location Input -->
+        <div class="section">
+            <label>
+                <input type="checkbox" id="use-manual-input" onchange="toggleManualInput()">
+                Use Manual Location Input
+            </label>
+            <div id="manual-input-section" style="display: none;">
+                <label for="manual-lat">Latitude</label>
+                <input type="text" id="manual-lat" placeholder="e.g., 13.0827" value="0">
+                <label for="manual-lon">Longitude</label>
+                <input type="text" id="manual-lon" placeholder="e.g., 80.2707" value="0">
+                <button class="update-button" onclick="submitManualLocation()">
+                    Submit Manual Location
+                </button>
+            </div>
+        </div>
+
+        <!-- Crowd Density Section -->
+        <div class="section">
+            <button class="suggest-button" onclick="checkCrowdDensity()">
+                Check Crowd Density
+            </button>
+            <div id="crowd-density" class="crowd-section"></div>
+            <div id="crowd-map" style="height: 500px; width: 100%; margin-top: 20px;"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Plotly for charts -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/crowd_script.js') }}"></script>
+</body>
+</html>

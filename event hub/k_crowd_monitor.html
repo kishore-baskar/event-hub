@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Monitor - EventHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crowd_styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo animate-slide-in-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EventHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li class="animate-slide-in-right"><a href="/">Home</a></li>
+            <li class="animate-slide-in-right"><a href="/events">Events</a></li>
+            <li class="animate-slide-in-right"><a href="/my_events">My Events</a></li>
+            <li class="animate-slide-in-right"><a href="/recommendations">Recommendations</a></li>
+            <li class="animate-slide-in-right"><a href="/add_event">Add Event</a></li>
+            <li class="animate-slide-in-right"><a href="/feedback">Feedback</a></li>
+            <li class="animate-slide-in-right"><a href="/performance_insights">Performance Insights</a></li>
+            <li class="animate-slide-in-right"><a href="/stall_suggestions">Stall Suggestions</a></li>
+            <li class="animate-slide-in-right"><a href="/crowd_monitor">Crowd Monitor</a></li>
+            <li class="animate-slide-in-right"><a href="/admin_dashboard">Admin Dashboard</a></li>
+            <li class="animate-slide-in-right"><a href="/chatbot">Chatbot</a></li>
+        </ul>
+    </nav>
+
+    <section class="form-section animate-slide-up">
+        <h2>Crowd Monitor</h2>
+        <form id="location-form" method="POST" action="/crowd_monitor">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <label>
+                <input type="checkbox" id="is-stall-owner" name="is_stall_owner" onchange="toggleStallNameInput()">
+                I’m a Stall Owner
+            </label>
+            <div id="stall-name-section" style="display: none;">
+                <input type="text" id="stall-name" name="stall_name" placeholder="Stall Name" class="animate-input">
+            </div>
+            <input type="number" name="latitude" id="manual-lat" placeholder="Latitude" required class="animate-input">
+            <input type="number" name="longitude" id="manual-lon" placeholder="Longitude" required class="animate-input">
+            <button type="submit" class="animate-button">Update Location</button>
+            <button type="button" id="remove-stall-btn" class="animate-button delete-btn" onclick="removeStall()" style="display: none;">Remove Stall</button>
+        </form>
+        <button type="button" class="animate-button" onclick="checkCrowdDensity()">Check Crowd Density</button>
+        <div class="prediction">
+            <h3>Stall Suggestion</h3>
+            <p>{{ suggestion.stall if suggestion.stall else "No suggestion available" }}: {{ suggestion.reason }}</p>
+        </div>
+        <div class="map-container animate-slide-up">
+            {{ map_html | safe }}
+        </div>
+        <div class="crowd-data">
+            {% for stall_name, details in crowd_data.items() %}
+            <div class="work-card animate-card">
+                <h3>{{ stall_name }}</h3>
+                <p><strong>Crowd Count:</strong> {{ details.crowd_count }}</p>
+                <p><strong>Crowd Level:</strong> {{ details.crowd_level }}</p>
+                <p><strong>Location:</strong> ({{ details.latitude }}, {{ details.longitude }})</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer class="animate-slide-up">
+        <p>© 2025 EventHub. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
