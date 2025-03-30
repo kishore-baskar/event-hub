@@ -112,5 +112,5 @@ python app.py
 - UI Issues: Confirm styles.css and scripts.js are in the static folder and loaded correctly.
 - Database Errors: Delete emr.db and rerun app.py to reinitialize.
 
-## Google drive link for demo video:
+## One drive link for demo video:
 -https://1drv.ms/v/c/e15e1adba3d259a7/EUbb1wTT3nxFoZNDnBLY9v0BfLgR-aY9v9PJX-IEnVo0Zw?e=40f1hs
